@@ -32,6 +32,14 @@ func (r *Run) Size(size int) *Run {
 	return r
 }
 
+// Size set run font
+func (r *Run) Font(font string) *Run {
+	r.RunProperties.Font = &Font{
+		Val: font,
+	}
+	return r
+}
+
 type Hyperlink struct {
 	XMLName xml.Name `xml:"w:hyperlink"`
 	ID      string   `xml:"r:id,attr"`

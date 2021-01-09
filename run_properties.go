@@ -11,6 +11,7 @@ type RunProperties struct {
 	Color    *Color    `xml:"w:color,omitempty"`
 	Size     *Size     `xml:"w:sz,omitempty"`
 	RunStyle *RunStyle `xml:"w:rStyle,omitempty"`
+	Font  	 *Font 	   `xml:"w:rFonts,omitempty"`
 }
 
 type RunStyle struct {
@@ -26,4 +27,9 @@ type Color struct {
 type Size struct {
 	XMLName xml.Name `xml:"w:sz"`
 	Val     int      `xml:"w:val,attr"`
+}
+
+type Font struct {
+	XMLName xml.Name `xml:"w:rFonts"`
+	Val     string      `xml:"w:hint,attr"`
 }
