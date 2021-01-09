@@ -153,7 +153,7 @@ func (f *File) addLinkRelation(link string) string {
 
 func (f *File) pack(zipWriter *zip.Writer) (err error) {
 	files := map[string]string{}
-	files["_rels/.rels"] = template.TEMP_REL_NEW
+	files["_rels/.rels"] = template.Rel
 
 	files["customXml/_rels/item1.xml.rels"]=
 		template.CustomXmlRelsItem1XmlRels
@@ -162,14 +162,14 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 	files["customXml/itemProps1.xml"]=
 		template.CustomXmlItemProps1
 
-	files["docProps/app.xml"] = template.TEMP_DOCPROPS_APP_NEW
-	files["docProps/core.xml"] = template.TEMP_DOCPROPS_CORE_NEW
+	files["docProps/app.xml"] = template.DocPropsApp
+	files["docProps/core.xml"] = template.DocPropsCore
 
 	files["word/_rels/document.xml.rels"], err = marshal(f.DocRelation)
 	if err != nil {
 		return err
 	}
-	files["word/theme/theme1.xml"] = template.TEMP_WORD_THEME_THEME_NEW
+	files["word/theme/theme1.xml"] = template.WordThemeTheme
 	files["word/webextensions/taskpanes.xml"]=template.WordWebextensionsTaskpanes
 	files["word/webextensions/webextension1.xml"]=template.WordWebextensionsWebextension1
 	files["word/webextensions/_rels/taskpanes.xml.rels"] = template.
@@ -180,20 +180,20 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 	files["word/commentsExtended.xml"]=template.WordCommentsExtended
 	files["word/commentsExtensible.xml"]=template.WordCommentsExtensible
 	files["word/commentsIds.xml"]=template.WordCommentIds
-	files["word/styles.xml"] = template.TEMP_WORD_STYLE_NEW
+	files["word/styles.xml"] = template.WordStyle
 	files["word/numbering.xml"]=template.WordNumbering
 	files["word/people.xml"]=template.WordPeopleNew
 	files["word/fontTable.xml"]=template.WordFontTableNew
 	files["word/webSettings.xml"]=template.WordWebSettingsNew
 
-	files["[Content_Types].xml"] = template.TEMP_CONTENT_NEW
+	files["[Content_Types].xml"] = template.ContentTypes
 	//files["word/_rels/document.xml.rels"] = template.DOC_Relation_NEW
 
 	//files["word/document.xml"], err = marshal(f.Document)
 	//if err != nil {
 	//	return err
 	//}
-	files["word/document.xml"] = template.WOED_DOCUMENT_NEW
+	files["word/document.xml"] = template.WordDocumentNew
 
 	for path, data := range files {
 		w, err := zipWriter.Create(path)
