@@ -187,12 +187,7 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 	files["word/webSettings.xml"]=template.WordWebSettingsNew
 
 	files["[Content_Types].xml"] = template.ContentTypes
-	//files["word/_rels/document.xml.rels"] = template.DOC_Relation_NEW
 
-	//files["word/document.xml"], err = marshal(f.Document)
-	//if err != nil {
-	//	return err
-	//}
 	files["word/document.xml"] = template.WordDocumentNew
 
 	for path, data := range files {
