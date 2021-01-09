@@ -164,12 +164,12 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 		return err
 	}
 	//files["word/_rels/document.xml.rels"] = template.DOC_Relation_NEW
-	
-	//files["word/document.xml"], err = marshal(f.Document)
-	//if err != nil {
-	//	return err
-	//}
-	files["word/document.xml"] = template.WOED_DOCUMENT_NEW
+
+	files["word/document.xml"], err = marshal(f.Document)
+	if err != nil {
+		return err
+	}
+	//files["word/document.xml"] = template.WOED_DOCUMENT_NEW
 
 	for path, data := range files {
 		w, err := zipWriter.Create(path)
