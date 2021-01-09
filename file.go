@@ -110,7 +110,7 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 	files["docProps/core.xml"] = TEMP_DOCPROPS_CORE
 	files["word/theme/theme1.xml"] = TEMP_WORD_THEME_THEME
 	files["word/styles.xml"] = TEMP_WORD_STYLE
-	files["[Content_Types].xml"] = TEMP_CONTENT
+	files["[Content_Types].xml"] = TEMP_CONTENT_NEW
 	files["word/_rels/document.xml.rels"], err = marshal(f.DocRelation)
 	if err != nil {
 		return err
