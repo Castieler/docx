@@ -6,6 +6,8 @@ import (
 	"io"
 	"os"
 	"strconv"
+
+	"github.com/gingfrederik/docx/template"
 )
 
 type File struct {
@@ -19,18 +21,64 @@ func NewFile() *File {
 	defaultRel := []*RelationShip{
 		{
 			ID:     "rId1",
+			Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml`,
+			Target: "../customXml/item1.xml",
+		},
+		{
+			ID:     "rId2",
+			Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering`,
+			Target: "numbering.xml",
+		},
+		{
+			ID:     "rId3",
 			Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles`,
 			Target: "styles.xml",
 		},
 		{
-			ID:     "rId2",
-			Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme`,
-			Target: "theme/theme1.xml",
+			ID:         "rId4",
+			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings",
+			Target:     "settings.xml",
 		},
 		{
-			ID:     "rId3",
-			Type:   `http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable`,
-			Target: "fontTable.xml",
+			ID:         "rId5",
+			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings",
+			Target:     "webSettings.xml",
+		},
+
+		{
+			ID:         "rId6",
+			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments",
+			Target:     "comments.xml",
+		},
+		{
+			ID:         "rId7",
+			Type:       "http://schemas.microsoft.com/office/2011/relationships/commentsExtended",
+			Target:     "commentsExtended.xml",
+		},
+		{
+			ID:         "rId8",
+			Type:       "http://schemas.microsoft.com/office/2016/09/relationships/commentsIds",
+			Target:     "commentsIds.xml",
+		},
+		{
+			ID:         "rId9",
+			Type:       "http://schemas.microsoft.com/office/2018/08/relationships/commentsExtensible",
+			Target:     "commentsExtensible.xml",
+		},
+		{
+			ID:         "rId10",
+			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable",
+			Target:     "fontTable.xml",
+		},
+		{
+			ID:         "rId11",
+			Type:       "http://schemas.microsoft.com/office/2011/relationships/people",
+			Target:     "people.xml",
+		},
+		{
+			ID:         "rId12",
+			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
+			Target:     "theme/theme1.xml",
 		},
 	}
 
@@ -105,20 +153,23 @@ func (f *File) addLinkRelation(link string) string {
 func (f *File) pack(zipWriter *zip.Writer) (err error) {
 	files := map[string]string{}
 
-	files["_rels/.rels"] = TEMP_REL
-	files["docProps/app.xml"] = TEMP_DOCPROPS_APP
-	files["docProps/core.xml"] = TEMP_DOCPROPS_CORE
-	files["word/theme/theme1.xml"] = TEMP_WORD_THEME_THEME
-	files["word/styles.xml"] = TEMP_WORD_STYLE
-	files["[Content_Types].xml"] = TEMP_CONTENT_NEW
+	files["_rels/.rels"] = template.TEMP_REL_NEW
+	files["docProps/app.xml"] = template.TEMP_DOCPROPS_APP_NEW
+	files["docProps/core.xml"] = template.TEMP_DOCPROPS_CORE_NEW
+	files["word/theme/theme1.xml"] = template.TEMP_WORD_THEME_THEME_NEW
+	files["word/styles.xml"] = template.TEMP_WORD_STYLE_NEW
+	files["[Content_Types].xml"] = template.TEMP_CONTENT_NEW
 	files["word/_rels/document.xml.rels"], err = marshal(f.DocRelation)
 	if err != nil {
 		return err
 	}
-	files["word/document.xml"], err = marshal(f.Document)
-	if err != nil {
-		return err
-	}
+	//files["word/_rels/document.xml.rels"] = template.DOC_Relation_NEW
+	
+	//files["word/document.xml"], err = marshal(f.Document)
+	//if err != nil {
+	//	return err
+	//}
+	files["word/document.xml"] = template.WOED_DOCUMENT_NEW
 
 	for path, data := range files {
 		w, err := zipWriter.Create(path)
