@@ -35,50 +35,50 @@ func NewFile() *File {
 			Target: "styles.xml",
 		},
 		{
-			ID:         "rId4",
-			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings",
-			Target:     "settings.xml",
+			ID:     "rId4",
+			Type:   "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings",
+			Target: "settings.xml",
 		},
 		{
-			ID:         "rId5",
-			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings",
-			Target:     "webSettings.xml",
+			ID:     "rId5",
+			Type:   "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings",
+			Target: "webSettings.xml",
 		},
 
 		{
-			ID:         "rId6",
-			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments",
-			Target:     "comments.xml",
+			ID:     "rId6",
+			Type:   "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments",
+			Target: "comments.xml",
 		},
 		{
-			ID:         "rId7",
-			Type:       "http://schemas.microsoft.com/office/2011/relationships/commentsExtended",
-			Target:     "commentsExtended.xml",
+			ID:     "rId7",
+			Type:   "http://schemas.microsoft.com/office/2011/relationships/commentsExtended",
+			Target: "commentsExtended.xml",
 		},
 		{
-			ID:         "rId8",
-			Type:       "http://schemas.microsoft.com/office/2016/09/relationships/commentsIds",
-			Target:     "commentsIds.xml",
+			ID:     "rId8",
+			Type:   "http://schemas.microsoft.com/office/2016/09/relationships/commentsIds",
+			Target: "commentsIds.xml",
 		},
 		{
-			ID:         "rId9",
-			Type:       "http://schemas.microsoft.com/office/2018/08/relationships/commentsExtensible",
-			Target:     "commentsExtensible.xml",
+			ID:     "rId9",
+			Type:   "http://schemas.microsoft.com/office/2018/08/relationships/commentsExtensible",
+			Target: "commentsExtensible.xml",
 		},
 		{
-			ID:         "rId10",
-			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable",
-			Target:     "fontTable.xml",
+			ID:     "rId10",
+			Type:   "http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable",
+			Target: "fontTable.xml",
 		},
 		{
-			ID:         "rId11",
-			Type:       "http://schemas.microsoft.com/office/2011/relationships/people",
-			Target:     "people.xml",
+			ID:     "rId11",
+			Type:   "http://schemas.microsoft.com/office/2011/relationships/people",
+			Target: "people.xml",
 		},
 		{
-			ID:         "rId12",
-			Type:       "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
-			Target:     "theme/theme1.xml",
+			ID:     "rId12",
+			Type:   "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
+			Target: "theme/theme1.xml",
 		},
 	}
 
@@ -87,9 +87,9 @@ func NewFile() *File {
 			XMLName: xml.Name{
 				Space: "w",
 			},
-			XMLW: XMLNS_W,
-			XMLR: XMLNS_R,
-			XMLW14:XMLNS_W14,
+			XMLW:   XMLNS_W,
+			XMLR:   XMLNS_R,
+			XMLW14: XMLNS_W14,
 			Body: &Body{
 				XMLName: xml.Name{
 					Space: "w",
@@ -152,14 +152,34 @@ func (f *File) addLinkRelation(link string) string {
 }
 
 func (f *File) pack(zipWriter *zip.Writer) (err error) {
+	docStr, err := marshal(f.Document)
+	if err != nil {
+		return err
+	}
+
+	return f.packWithDocStr(zipWriter, docStr)
+}
+
+func marshal(data interface{}) (out string, err error) {
+	body, err := xml.Marshal(data)
+	if err != nil {
+		return
+	}
+
+	out = xml.Header + string(body)
+	return
+}
+
+func (f *File) packWithDocStr(zipWriter *zip.Writer,
+	documentStr string) (err error) {
 	files := map[string]string{}
 	files["_rels/.rels"] = template.Rel
 
-	files["customXml/_rels/item1.xml.rels"]=
+	files["customXml/_rels/item1.xml.rels"] =
 		template.CustomXmlRelsItem1XmlRels
-	files["customXml/item1.xml"]=
+	files["customXml/item1.xml"] =
 		template.CustomXmlItem1
-	files["customXml/itemProps1.xml"]=
+	files["customXml/itemProps1.xml"] =
 		template.CustomXmlItemProps1
 
 	files["docProps/app.xml"] = template.DocPropsApp
@@ -170,25 +190,24 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 		return err
 	}
 	files["word/theme/theme1.xml"] = template.WordThemeTheme
-	files["word/webextensions/taskpanes.xml"]=template.WordWebextensionsTaskpanes
-	files["word/webextensions/webextension1.xml"]=template.WordWebextensionsWebextension1
+	files["word/webextensions/taskpanes.xml"] = template.WordWebextensionsTaskpanes
+	files["word/webextensions/webextension1.xml"] = template.WordWebextensionsWebextension1
 	files["word/webextensions/_rels/taskpanes.xml.rels"] = template.
 		WordWebextensionsRelsTaskpanesXmlRels
 
-
-	files["word/comments.xml"]=template.WordComments
-	files["word/commentsExtended.xml"]=template.WordCommentsExtended
-	files["word/commentsExtensible.xml"]=template.WordCommentsExtensible
-	files["word/commentsIds.xml"]=template.WordCommentIds
+	files["word/comments.xml"] = template.WordComments
+	files["word/commentsExtended.xml"] = template.WordCommentsExtended
+	files["word/commentsExtensible.xml"] = template.WordCommentsExtensible
+	files["word/commentsIds.xml"] = template.WordCommentIds
 	files["word/styles.xml"] = template.WordStyle
-	files["word/numbering.xml"]=template.WordNumbering
-	files["word/people.xml"]=template.WordPeopleNew
-	files["word/fontTable.xml"]=template.WordFontTableNew
-	files["word/webSettings.xml"]=template.WordWebSettingsNew
+	files["word/numbering.xml"] = template.WordNumbering
+	files["word/people.xml"] = template.WordPeopleNew
+	files["word/fontTable.xml"] = template.WordFontTableNew
+	files["word/webSettings.xml"] = template.WordWebSettingsNew
 
 	files["[Content_Types].xml"] = template.ContentTypes
 
-	files["word/document.xml"] = template.WordDocumentNew
+	files["word/document.xml"] = documentStr
 
 	for path, data := range files {
 		w, err := zipWriter.Create(path)
@@ -202,15 +221,5 @@ func (f *File) pack(zipWriter *zip.Writer) (err error) {
 		}
 	}
 
-	return
-}
-
-func marshal(data interface{}) (out string, err error) {
-	body, err := xml.Marshal(data)
-	if err != nil {
-		return
-	}
-
-	out = xml.Header + string(body)
 	return
 }

@@ -1,6 +1,8 @@
 package docx
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+)
 
 type Paragraph struct {
 	XMLName xml.Name `xml:"w:p"`
