@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/gingfrederik/docx/template"
+	"powerlaw.ai/platforn/docx/template"
 )
 
 type File struct {
@@ -195,13 +195,11 @@ func (f *File) packWithDocStr(zipWriter *zip.Writer,
 	files["word/webextensions/_rels/taskpanes.xml.rels"] = template.
 		WordWebextensionsRelsTaskpanesXmlRels
 
-	//files["word/comments.xml"] = template.WordComments
 	files["word/commentsExtended.xml"] = template.WordCommentsExtended
 	files["word/commentsExtensible.xml"] = template.WordCommentsExtensible
 	files["word/commentsIds.xml"] = template.WordCommentIds
 	files["word/styles.xml"] = template.WordStyle
 	files["word/numbering.xml"] = template.WordNumbering
-	//files["word/people.xml"] = template.WordPeopleNew
 	files["word/fontTable.xml"] = template.WordFontTableNew
 	files["word/webSettings.xml"] = template.WordWebSettingsNew
 

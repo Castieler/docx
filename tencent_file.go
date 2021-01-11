@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/gingfrederik/docx/template"
+	"powerlaw.ai/platforn/docx/template"
 )
 
 type PrizePO struct {
