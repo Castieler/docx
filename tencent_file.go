@@ -2,6 +2,7 @@ package docx
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 
@@ -45,10 +46,20 @@ func WriteTencentDocx(po TencentPO, writer io.Writer) (err error) {
 }
 
 func genDocumentStr(po TencentPO) string {
-	return template.ActivityName + po.ActivityName +
-		template.ActivityTime + po.ActivityTime +
-		 template.ParticipantQualification + po.ParticipantQualification +
-		template.ParticipateWay + po.ParticipateWay +
-		template.WinningRules + po.WinningRules +
-		template.WordDocDemo6
+	var rowStyleStr string
+	for _, prize := range po.Prizes {
+		rowStyleStr += fmt.Sprintf(template.TableRow,
+			prize.Name, prize.Description, prize.Probability, prize.Count,
+		)
+	}
+
+	docStr := fmt.Sprintf(template.Demo,
+		po.ActivityName,
+		po.ActivityTime,
+		po.ParticipantQualification,
+		po.ParticipateWay,
+		po.WinningRules,
+		rowStyleStr,
+	)
+	return docStr
 }
