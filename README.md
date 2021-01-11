@@ -1,19 +1,12 @@
 # docx
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/gingfrederik/docx?sort=semver)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gingfrederik/docx)](https://goreportcard.com/report/github.com/gingfrederik/docx)
-[![GoDoc](https://pkg.go.dev/badge/github.com/gingfrederik/docx?status.svg)](https://pkg.go.dev/github.com/gingfrederik/docx?tab=doc)
 ## Introduction
 docx is a simple library to creating DOCX file in Go.
 
 ## Getting Started
 ### Install
-Go modules supported
-```sh
-go get github.com/gingfrederik/docx
-```
 Import:
 ```sh
-import "github.com/gingfrederik/docx"
+import "powerlaw.ai/platforn/docx"
 ```
 
 ### Usage
@@ -22,11 +15,11 @@ import "github.com/gingfrederik/docx"
 package main
 
 import (
-	"github.com/gingfrederik/docx"
+	docx2 "powerlaw.ai/platforn/docx/docx"
 )
 
 func main() {
-	f := docx.NewFile()
+	f := docx2.NewDocx()
 	// add new paragraph
 	para := f.AddParagraph()
 	// add text
@@ -37,7 +30,7 @@ func main() {
 	para.AddText("test font size and color").Size(22).Color("121212")
 
 	nextPara := f.AddParagraph()
-	nextPara.AddLink("google", `http://google.com`)
+	f.AddParagraphLink(nextPara, "google", `http://google.com`)
 
 	f.Save("./test.docx")
 }
