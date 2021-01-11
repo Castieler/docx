@@ -98,10 +98,10 @@ const (
                 <w:t>参与方式</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="2852B645" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00743371" w:rsidP="0055086D">
+        <w:p >
             <w:pPr>
             </w:pPr>
-            <w:r w:rsidRPr="0029777C">
+            <w:r>
                 <w:t>`
 	WordDocDemo5 = `</w:t>
             </w:r>
