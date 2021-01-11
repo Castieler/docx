@@ -3,7 +3,7 @@ package paragraph
 import (
 	"encoding/xml"
 
-	run2 "powerlaw.ai/platforn/docx/docx/run"
+	run2 "powerlaw.ai/platform/docx/docx/run"
 )
 
 type Paragraph struct {

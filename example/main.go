@@ -1,7 +1,7 @@
 package main
 
 import (
-	docx2 "powerlaw.ai/platforn/docx/docx"
+	docx2 "powerlaw.ai/platform/docx/docx"
 )
 
 func main() {

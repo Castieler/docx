@@ -6,7 +6,7 @@ docx is a simple library to creating DOCX file in Go.
 ### Install
 Import:
 ```sh
-import "powerlaw.ai/platforn/docx"
+import "powerlaw.ai/platform/docx"
 ```
 
 ### Usage
@@ -15,7 +15,7 @@ import "powerlaw.ai/platforn/docx"
 package main
 
 import (
-	docx2 "powerlaw.ai/platforn/docx/docx"
+	docx2 "powerlaw.ai/platform/docx/docx"
 )
 
 func main() {

@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"powerlaw.ai/platforn/docx/docx/template"
+	"powerlaw.ai/platform/docx/docx/template"
 )
 
 type PrizePO struct {

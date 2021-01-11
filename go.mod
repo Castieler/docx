@@ -1,3 +1,3 @@
-module powerlaw.ai/platforn/docx
+module powerlaw.ai/platform/docx
 
 go 1.13

@@ -7,10 +7,10 @@ import (
 	"os"
 	"strconv"
 
-	"powerlaw.ai/platforn/docx/docx/paragraph"
-	"powerlaw.ai/platforn/docx/docx/relationship"
-	run2 "powerlaw.ai/platforn/docx/docx/run"
-	"powerlaw.ai/platforn/docx/docx/template"
+	"powerlaw.ai/platform/docx/docx/paragraph"
+	"powerlaw.ai/platform/docx/docx/relationship"
+	run2 "powerlaw.ai/platform/docx/docx/run"
+	"powerlaw.ai/platform/docx/docx/template"
 )
 
 const (
