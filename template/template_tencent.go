@@ -78,38 +78,13 @@ const (
             </w:r>
         </w:p>
         <w:p w14:paraId="7C466785" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00743371" w:rsidP="0055086D">
-            <w:commentRangeStart w:id="0"/>
             <w:r w:rsidRPr="00743371">
                 <w:t>参与者应具备以下全部资格：每个自然人仅可使用一个自己合法有权的QQ号码(微信账号、手机号码等)参与一次活动。参与者应具备以下全部资格：每个自然人仅可使用一个自己合法有权的QQ号码(微信账号、手机号码等)参与一次活动。参与者应具备以下全部资格</w:t>
-            </w:r>
-            <w:ins w:id="1" w:author="唐 穆" w:date="2020-10-27T18:32:00Z">
-                <w:r w:rsidR="0029777C">
-                    <w:rPr>
-                        <w:rFonts w:hint="eastAsia"/>
-                    </w:rPr>
-                    <w:t>阿萨德阿萨德</w:t>
-                </w:r>
-            </w:ins>
-            <w:r w:rsidRPr="00743371">
-                <w:t>：每个自然人仅可使用一个自己合法有权的QQ号码(微信账号、手机号码等)参与一次活动。参与者应具备以下参与者应具备以下全部资格：每个自然人仅可使用一个自己合法有权的QQ号码(微信账号、可使用一个自己合法有权的QQ号码(微信账号、手机号码等)参与一次活动。参与者应具备以下参与者应具备以下全部资格：每个自然人仅可使用一个自己合法有权的QQ号码(微信账号</w:t>
-            </w:r>
-            <w:commentRangeEnd w:id="0"/>
-            <w:r w:rsidR="0029777C">
-                <w:rPr>
-                    <w:rStyle w:val="a4"/>
-                </w:rPr>
-                <w:commentReference w:id="0"/>
             </w:r>
         </w:p>
         <w:p w14:paraId="33FE625C" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00743371" w:rsidP="0055086D">
             <w:pPr>
                 <w:pStyle w:val="1"/>
-                <w:pPrChange w:id="2" w:author="唐 穆" w:date="2020-10-27T18:40:00Z">
-                    <w:pPr>
-                        <w:pStyle w:val="1"/>
-                        <w:ind w:leftChars="-4" w:left="-8" w:firstLineChars="1"/>
-                    </w:pPr>
-                </w:pPrChange>
             </w:pPr>
             <w:r w:rsidRPr="00743371">
                 <w:t>活动规则</w:t>
@@ -118,11 +93,6 @@ const (
         <w:p w14:paraId="411045CE" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00743371" w:rsidP="0055086D">
             <w:pPr>
                 <w:pStyle w:val="2"/>
-                <w:pPrChange w:id="3" w:author="唐 穆" w:date="2020-10-27T18:40:00Z">
-                    <w:pPr>
-                        <w:pStyle w:val="1"/>
-                    </w:pPr>
-                </w:pPrChange>
             </w:pPr>
             <w:r w:rsidRPr="0029777C">
                 <w:t>参与方式</w:t>
@@ -130,11 +100,6 @@ const (
         </w:p>
         <w:p w14:paraId="2852B645" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00743371" w:rsidP="0055086D">
             <w:pPr>
-                <w:pPrChange w:id="4" w:author="唐 穆" w:date="2020-10-27T18:40:00Z">
-                    <w:pPr>
-                        <w:pStyle w:val="2"/>
-                    </w:pPr>
-                </w:pPrChange>
             </w:pPr>
             <w:r w:rsidRPr="0029777C">
                 <w:t>`
