@@ -1,4 +1,4 @@
-package docx
+package run
 
 import "encoding/xml"
 
@@ -11,7 +11,7 @@ type RunProperties struct {
 	Color    *Color    `xml:"w:color,omitempty"`
 	Size     *Size     `xml:"w:sz,omitempty"`
 	RunStyle *RunStyle `xml:"w:rStyle,omitempty"`
-	Font  	 *Font 	   `xml:"w:rFonts,omitempty"`
+	Font     *Font     `xml:"w:rFonts,omitempty"`
 }
 
 type RunStyle struct {
@@ -31,5 +31,5 @@ type Size struct {
 
 type Font struct {
 	XMLName xml.Name `xml:"w:rFonts"`
-	Val     string      `xml:"w:hint,attr"`
+	Val     string   `xml:"w:hint,attr"`
 }

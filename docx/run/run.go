@@ -1,4 +1,4 @@
-package docx
+package run
 
 import "encoding/xml"
 

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"powerlaw.ai/platforn/docx"
+	docx2 "powerlaw.ai/platforn/docx/docx"
 )
 
 func main() {
-	f := docx.NewFile()
+	f := docx2.NewDocx()
 	// add new paragraph
 	para := f.AddParagraph()
 	// add text
@@ -16,7 +16,7 @@ func main() {
 	para.AddText("test font size and color").Size(22).Color("121212")
 
 	nextPara := f.AddParagraph()
-	nextPara.AddLink("google", `http://google.com`)
+	f.AddParagraphLink(nextPara, "google", `http://google.com`)
 
 	f.Save("./test.docx")
 }

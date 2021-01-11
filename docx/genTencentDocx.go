@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"powerlaw.ai/platforn/docx/template"
+	"powerlaw.ai/platforn/docx/docx/template"
 )
 
 type PrizePO struct {
@@ -27,7 +27,7 @@ type TencentPO struct {
 
 // Save save file to path
 func SaveTencentDocx(po TencentPO, path string) (err error) {
-	f := NewFile()
+	f := NewDocx()
 	fzip, _ := os.Create(path)
 	defer fzip.Close()
 
@@ -38,7 +38,7 @@ func SaveTencentDocx(po TencentPO, path string) (err error) {
 }
 
 func WriteTencentDocx(po TencentPO, writer io.Writer) (err error) {
-	f := NewFile()
+	f := NewDocx()
 	zipWriter := zip.NewWriter(writer)
 	defer zipWriter.Close()
 	docStr := genDocumentStr(po)
