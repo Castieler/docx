@@ -45,7 +45,10 @@ func WriteTencentDocx(po TencentPO, writer io.Writer) (err error) {
 }
 
 func genDocumentStr(po TencentPO) string {
-	return template.WordDocumentDemo + po.ActivityName + template.WordDocDemo2 +
-		po.ActivityTime + template.WordDocDemo3 +
-		po.ParticipateWay + template.WordDocDemo5 + po.WinningRules + template.WordDocDemo6
+	return template.ActivityName + po.ActivityName +
+		template.ActivityTime + po.ActivityTime +
+		 template.ParticipantQualification + po.ParticipantQualification +
+		template.ParticipateWay + po.ParticipateWay +
+		template.WinningRules + po.WinningRules +
+		template.WordDocDemo6
 }

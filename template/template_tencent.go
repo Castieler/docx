@@ -1,7 +1,7 @@
 package template
 
 const (
-	WordDocumentDemo = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	ActivityName = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document
         xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
         xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex"
@@ -58,7 +58,7 @@ const (
                     <w:rFonts w:hint="eastAsia"/>
                 </w:rPr>
                 <w:t>`
-	WordDocDemo2 = `</w:t>
+	ActivityTime = `</w:t>
             </w:r>
         </w:p>
         <w:p w14:paraId="45582A9A" w14:textId="02ED620B" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
@@ -81,7 +81,7 @@ const (
         <w:p w14:paraId="62673B8C" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
             <w:r w:rsidRPr="00743371">
                 <w:t>`
-	WordDocDemo3 = `</w:t>
+	ParticipantQualification = `</w:t>
             </w:r>
         </w:p>
         <w:p w14:paraId="2D644F63" w14:textId="1A26E22E" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
@@ -103,43 +103,8 @@ const (
         </w:p>
         <w:p w14:paraId="7C466785" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
             <w:r w:rsidRPr="00743371">
-                <w:t>参与者应具备以下全部资格：每个自然人仅可使用一个自己合法有权的</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>QQ</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>号码</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>(</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>微信账号、手机号码等</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>)</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>参与一次活动。参与者应具备以下全部资格：每个自然人仅可使用一个自己合法有权的</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>QQ</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>号码</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>(</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>微信账号、手机号码等</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>)</w:t>
-            </w:r>
-            <w:r w:rsidRPr="00743371">
-                <w:t>参与一次活动。参与者应具备以下全部资格</w:t>
+                <w:t>`
+	ParticipateWay = `</w:t>
             </w:r>
         </w:p>
         <w:p w14:paraId="33FE625C" w14:textId="0222CD82" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
@@ -176,7 +141,7 @@ const (
         <w:p w14:paraId="5D96B1F9" w14:textId="77777777" w:rsidR="00540B5F" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
             <w:r>
                 <w:t xml:space="preserve">`
-	WordDocDemo5 = `</w:t>
+	WinningRules = `</w:t>
             </w:r>
             <w:proofErr w:type="spellStart"/>
             <w:proofErr w:type="spellEnd"/>
