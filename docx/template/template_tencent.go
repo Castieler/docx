@@ -1,6 +1,91 @@
 package template
 
 const (
+	TableStyle = `        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="a3"/>
+                <w:tblW w:w="5000" w:type="pct"/>
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="1830"/>
+                <w:gridCol w:w="3288"/>
+                <w:gridCol w:w="2069"/>
+                <w:gridCol w:w="1103"/>
+            </w:tblGrid>
+            <w:tr w:rsidR="0055086D" w:rsidRPr="00743371" w14:paraId="0E6E14AA" w14:textId="77777777" w:rsidTr="0055086D">
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1104" w:type="pct"/>
+                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="6A75AB5D" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
+                        <w:pPr>
+                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="0029777C">
+                            <w:rPr>
+                                <w:rFonts w:hint="eastAsia"/>
+                            </w:rPr>
+                            <w:t>奖项名称</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1983" w:type="pct"/>
+                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="3F3C0566" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
+                        <w:pPr>
+                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="0029777C">
+                            <w:rPr>
+                                <w:rFonts w:hint="eastAsia"/>
+                            </w:rPr>
+                            <w:t>奖品描述</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="1248" w:type="pct"/>
+                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="7CA7E222" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
+                        <w:pPr>
+                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="0029777C">
+                            <w:rPr>
+                                <w:rFonts w:hint="eastAsia"/>
+                            </w:rPr>
+                            <w:t>中奖概率</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="665" w:type="pct"/>
+                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
+                    </w:tcPr>
+                    <w:p w14:paraId="4F9B2883" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
+                        <w:pPr>
+                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+                        </w:pPr>
+                        <w:r w:rsidRPr="0029777C">
+                            <w:rPr>
+                                <w:rFonts w:hint="eastAsia"/>
+                            </w:rPr>
+                            <w:t>数量</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+			%s
+        </w:tbl>`
+
 	TableRow = `<w:tr w:rsidR="0029777C" w:rsidRPr="00743371" w14:paraId="525E0653" w14:textId="77777777" w:rsidTr="0055086D">
                 <w:tc>
                     <w:tcPr>
@@ -97,102 +182,15 @@ const (
         xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex wp14">
     <w:body>
 		%s
-		<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>资格取消</w:t>
-            </w:r>
-        </w:p>
-    	%s
-		<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>纳税义务</w:t>
-            </w:r>
-        </w:p>
-		%s
-		<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>免责条款</w:t>
-            </w:r>
-        </w:p>
-		%s
-		<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>管辖条款</w:t>
-            </w:r>
-        </w:p>
-		%s
-		<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>其他</w:t>
-            </w:r>
-        </w:p>
-		%s
     </w:body>
 </w:document>`
 
-	ActivateRuleStyle = `<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
+	FirstTitleStyle = `<w:p w14:paraId="5ED56D03" w14:textId="7981F797" w:rsidR="00425149" w:rsidRPr="00743371" w:rsidRDefault="00C736C8" w:rsidP="00C736C8">
             <w:pPr>
                 <w:pStyle w:val="1"/>
+                <w:keepNext w:val="0"/>
+                <w:keepLines w:val="0"/>
+                <w:spacing w:line="240" w:lineRule="auto"/>
             </w:pPr>
             <w:r>
                 <w:rPr>
@@ -200,214 +198,20 @@ const (
                 </w:rPr>
                 <w:t>%s、</w:t>
             </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
+            <w:r w:rsidRPr="00743371">
                 <w:rPr>
                     <w:rFonts w:hint="eastAsia"/>
                 </w:rPr>
-                <w:t>活动名称</w:t>
+                <w:t>%s</w:t>
             </w:r>
-        </w:p>
-		%s
-        <w:p w14:paraId="45582A9A" w14:textId="02ED620B" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:t>活动时间</w:t>
-            </w:r>
-        </w:p>
-		%s
-        <w:p w14:paraId="2D644F63" w14:textId="1A26E22E" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="0029777C">
-                <w:t>参与者资格</w:t>
-            </w:r>
-        </w:p>
-		%s
-        <w:p w14:paraId="33FE625C" w14:textId="0222CD82" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="1"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>%s、</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:t>活动规则</w:t>
-            </w:r>
-        </w:p>
-        <w:p w14:paraId="411045CE" w14:textId="17711249" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="2"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>（一）</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="0029777C">
-                <w:t>参与方式</w:t>
-            </w:r>
-        </w:p>
-		%s
-        <w:p w14:paraId="08274505" w14:textId="6770691E" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="2"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>（二）</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:t>奖项设置</w:t>
-            </w:r>
-        </w:p>
-		%s
-        <w:tbl>
-            <w:tblPr>
-                <w:tblStyle w:val="a3"/>
-                <w:tblW w:w="5000" w:type="pct"/>
-                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
-            </w:tblPr>
-            <w:tblGrid>
-                <w:gridCol w:w="1830"/>
-                <w:gridCol w:w="3288"/>
-                <w:gridCol w:w="2069"/>
-                <w:gridCol w:w="1103"/>
-            </w:tblGrid>
-            <w:tr w:rsidR="0055086D" w:rsidRPr="00743371" w14:paraId="0E6E14AA" w14:textId="77777777" w:rsidTr="0055086D">
-                <w:tc>
-                    <w:tcPr>
-                        <w:tcW w:w="1104" w:type="pct"/>
-                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
-                    </w:tcPr>
-                    <w:p w14:paraId="6A75AB5D" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
-                        <w:pPr>
-                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-                        </w:pPr>
-                        <w:r w:rsidRPr="0029777C">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>奖项名称</w:t>
-                        </w:r>
-                    </w:p>
-                </w:tc>
-                <w:tc>
-                    <w:tcPr>
-                        <w:tcW w:w="1983" w:type="pct"/>
-                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
-                    </w:tcPr>
-                    <w:p w14:paraId="3F3C0566" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
-                        <w:pPr>
-                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-                        </w:pPr>
-                        <w:r w:rsidRPr="0029777C">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>奖品描述</w:t>
-                        </w:r>
-                    </w:p>
-                </w:tc>
-                <w:tc>
-                    <w:tcPr>
-                        <w:tcW w:w="1248" w:type="pct"/>
-                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
-                    </w:tcPr>
-                    <w:p w14:paraId="7CA7E222" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
-                        <w:pPr>
-                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-                        </w:pPr>
-                        <w:r w:rsidRPr="0029777C">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>中奖概率</w:t>
-                        </w:r>
-                    </w:p>
-                </w:tc>
-                <w:tc>
-                    <w:tcPr>
-                        <w:tcW w:w="665" w:type="pct"/>
-                        <w:shd w:val="clear" w:color="auto" w:fill="D9D9D9" w:themeFill="background1" w:themeFillShade="D9"/>
-                    </w:tcPr>
-                    <w:p w14:paraId="4F9B2883" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9">
-                        <w:pPr>
-                            <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-                        </w:pPr>
-                        <w:r w:rsidRPr="0029777C">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>数量</w:t>
-                        </w:r>
-                    </w:p>
-                </w:tc>
-            </w:tr>
-			%s
-        </w:tbl>
-        <w:p w14:paraId="08274505" w14:textId="6770691E" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="2"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>（三）</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:t>开奖设置</w:t>
-            </w:r>
-        </w:p>
-		%s
-        <w:p w14:paraId="08274505" w14:textId="6770691E" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
-            <w:pPr>
-                <w:pStyle w:val="2"/>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:rFonts w:hint="eastAsia"/>
-                </w:rPr>
-                <w:t>（四）</w:t>
-            </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
-                <w:t>奖品发放</w:t>
-            </w:r>
-        </w:p>
-		%s
-		%s
-        <w:p w14:paraId="5AE6B7C6" w14:textId="77777777" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00BF7A43" w:rsidP="00353DA9"/>
-        <w:sectPr w:rsidR="00743371" w:rsidRPr="00743371" w:rsidSect="00294703">
-            <w:pgSz w:w="11900" w:h="16840"/>
-            <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992" w:gutter="0"/>
-            <w:cols w:space="425"/>
-            <w:docGrid w:type="lines" w:linePitch="312"/>
-        </w:sectPr>`
+        </w:p>`
 
-	SubRuleStyle = `<w:p w14:paraId="08274505" w14:textId="6770691E" w:rsidR="00743371" w:rsidRPr="00743371" w:rsidRDefault="00353DA9" w:rsidP="00353DA9">
+	SecondTitleRuleStyle = `<w:p w14:paraId="411045CE" w14:textId="17711249" w:rsidR="00743371" w:rsidRPr="0029777C" w:rsidRDefault="00C736C8" w:rsidP="00C736C8">
             <w:pPr>
                 <w:pStyle w:val="2"/>
+                <w:keepNext w:val="0"/>
+                <w:keepLines w:val="0"/>
+                <w:spacing w:line="240" w:lineRule="auto"/>
             </w:pPr>
             <w:r>
                 <w:rPr>
@@ -415,12 +219,15 @@ const (
                 </w:rPr>
                 <w:t>（%s）</w:t>
             </w:r>
-            <w:r w:rsidR="00BF7A43" w:rsidRPr="00743371">
+            <w:r w:rsidRPr="0029777C">
                 <w:t>%s</w:t>
             </w:r>
-        </w:p>
-        %s`
-	NewLineStyle = `<w:p>
+        </w:p>`
+
+	NewLineStyle = `<w:p w14:paraId="365F210D" w14:textId="77777777" w:rsidR="00E3674D" w:rsidRDefault="00C736C8" w:rsidP="00C736C8">
+            <w:pPr>
+                <w:spacing w:line="240" w:lineRule="auto"/>
+            </w:pPr>
             <w:r>
                 <w:rPr>
                     <w:rFonts w:hint="eastAsia"/>
@@ -428,4 +235,12 @@ const (
                 <w:t>%s</w:t>
             </w:r>
         </w:p>`
+)
+
+var (
+	ActivityFirstTitleList = []string{"活动名称", "活动时间", "参与者资格", "活动规则"}
+
+	SecondTitleList = []string{"参与方式", "奖项设置", "开奖设置", "奖品发放"}
+
+	EndFirstTitleList = []string{"资格取消", "纳税义务", "免责条款", "管辖条款", "其他"}
 )

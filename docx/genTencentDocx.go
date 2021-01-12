@@ -68,47 +68,71 @@ func genDocumentStr(po EventsVO) string {
 	allActivates := po.ActivityRules
 	var docStr, activityStr string
 	var indexNum = 1
-	// 一级标题数量：活动名称、活动时间、参与者资格、活动规则
-	firstTitleNum := 4
-	// 二级标题数量：参与方式、奖项设置、开奖设置、奖品发放
-	secondTitleNum := 4
 	for _, ar := range allActivates {
+		// 1. 拼接 "活动名称", "活动时间", "参与者资格", "活动规则" 样式及内容
+		firstTitleContent := []string{
+			ar.Name,                     // 活动名称
+			ar.Time,                     //  活动时间
+			ar.ParticipantQualification, // 参与资格
+			"",                          // 活动规则内容为空
+		}
+		for index, ft := range template.ActivityFirstTitleList {
+			activityStr += fmt.Sprintf(template.FirstTitleStyle,
+				Num2ChineseStr(indexNum+index), ft)
+			firstContentStr := firstTitleContent[index]
+			if firstContentStr != "" {
+				activityStr += handleStrNewLine(firstContentStr)
+			}
+		}
+		// 2. 拼接活动规则下的数据
 		var tabRowStyleStr, subRuleStr string
-		// 构建奖品表中的数据样式字符串
 		for _, prize := range ar.Prizes {
 			tabRowStyleStr += fmt.Sprintf(template.TableRow,
 				prize.Name, prize.Description, prize.Probability, prize.Count,
 			)
 		}
 
-		// 构建活动中子标题样式字符串
-		for index, name := range ar.SubRules {
-			subRuleStr += fmt.Sprintf(
-				template.SubRuleStyle, Num2ChineseStr(secondTitleNum+index+1),
-				name.Name, handleStrNewLine(name.Content))
-		}
-		activityStr += fmt.Sprintf(template.ActivateRuleStyle,
-			Num2ChineseStr(indexNum), handleStrNewLine(ar.Name), // 汉字序号，活动名称
-			Num2ChineseStr(indexNum+1), handleStrNewLine(ar.Time), // 汉字序号，活动时间
-			Num2ChineseStr(indexNum+2), handleStrNewLine(ar.ParticipantQualification), // 汉字序号，参与资格
-			Num2ChineseStr(indexNum+3),             // 活动规则汉字序号
-			handleStrNewLine(ar.ParticipateWay),    // 参与方式
-			handleStrNewLine(ar.PrizeContent),      // 奖项设置
-			tabRowStyleStr,                         // 奖品内容
+		secondContentList := []string{
+			handleStrNewLine(ar.ParticipateWay),
+			handleStrNewLine(ar.PrizeContent) + fmt.Sprintf(template.TableStyle, tabRowStyleStr),
 			handleStrNewLine(ar.Announcement),      // 开奖设置
 			handleStrNewLine(ar.AwardDistribution), // 奖品发放
-			subRuleStr,                             // 自定义子标题
-		)
+		}
+		secondTitleList := template.SecondTitleList
+		for _, name := range ar.SubRules {
+			secondTitleList = append(secondTitleList, name.Name)
+			secondContentList = append(secondContentList,
+				handleStrNewLine(name.Content))
+		}
 
-		indexNum += firstTitleNum
+		for index, name := range secondTitleList {
+			subRuleStr += fmt.Sprintf(
+				template.SecondTitleRuleStyle, Num2ChineseStr(index+1), name)
+			subRuleStr += secondContentList[index]
+		}
+		activityStr += subRuleStr
+		indexNum += len(template.ActivityFirstTitleList)
 	}
+
+	// 3. 拼接 "资格取消", "纳税义务", "免责条款", "管辖条款", "其他" 样式及内容
+	firstTitleContent := []string{
+		po.Disqualification,
+		po.TaxDuty,
+		po.ExemptionClause,
+		po.JurisdictionClause,
+		po.Other,
+	}
+	for index, ft := range template.EndFirstTitleList {
+		activityStr += fmt.Sprintf(template.FirstTitleStyle,
+			Num2ChineseStr(indexNum+index), ft)
+		firstContentStr := firstTitleContent[index]
+		if firstContentStr != "" {
+			activityStr += handleStrNewLine(firstContentStr)
+		}
+	}
+
 	docStr = fmt.Sprintf(template.DocxStyle,
-		activityStr,                                                     // 所有活动样式字符串
-		Num2ChineseStr(indexNum), handleStrNewLine(po.Disqualification), // 汉字序号,资格取消
-		Num2ChineseStr(indexNum+1), handleStrNewLine(po.TaxDuty), // 汉字序号，纳税义务
-		Num2ChineseStr(indexNum+2), handleStrNewLine(po.ExemptionClause), // 汉字序号，免责条款
-		Num2ChineseStr(indexNum+3), handleStrNewLine(po.JurisdictionClause), // 汉字序号，管辖条款
-		Num2ChineseStr(indexNum+4), handleStrNewLine(po.Other), // 汉字序号，其他
+		activityStr, // 所有活动样式字符串
 	)
 
 	return docStr
