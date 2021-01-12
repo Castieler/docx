@@ -18,5 +18,5 @@ func main() {
 	nextPara := f.AddParagraph()
 	f.AddParagraphLink(nextPara, "google", `http://google.com`)
 
-	f.Save("./test.docx")
+	_ = f.Save("./test.docx")
 }
