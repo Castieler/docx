@@ -18,8 +18,6 @@ type PrizePO struct {
 }
 
 type EventsVO struct {
-	Name               string
-	Qualification      string
 	ActivityRules      []ActivityRule
 	Disqualification   string // 资格取消
 	TaxDuty            string // 纳税义务
@@ -69,7 +67,11 @@ func WriteTencentDocx(po EventsVO, writer io.Writer) (err error) {
 func genDocumentStr(po EventsVO) string {
 	allActivates := po.ActivityRules
 	var docStr, activityStr string
-	var indexNum int
+	var indexNum = 1
+	// 一级标题数量：活动名称、活动时间、参与者资格、活动规则
+	firstTitleNum := 4
+	// 二级标题数量：参与方式、奖项设置、开奖设置、奖品发放
+	secondTitleNum := 4
 	for _, ar := range allActivates {
 		var tabRowStyleStr, subRuleStr string
 		// 构建奖品表中的数据样式字符串
@@ -78,19 +80,18 @@ func genDocumentStr(po EventsVO) string {
 				prize.Name, prize.Description, prize.Probability, prize.Count,
 			)
 		}
-		endVal := indexNum + 5
 
 		// 构建活动中子标题样式字符串
 		for index, name := range ar.SubRules {
 			subRuleStr += fmt.Sprintf(
-				template.SubRuleStyle, Num2ChineseStr(endVal+index),
+				template.SubRuleStyle, Num2ChineseStr(secondTitleNum+index+1),
 				name.Name, handleStrNewLine(name.Content))
 		}
 		activityStr += fmt.Sprintf(template.ActivateRuleStyle,
-			Num2ChineseStr(indexNum+1), handleStrNewLine(ar.Name), // 汉字序号，活动名称
-			Num2ChineseStr(indexNum+2), handleStrNewLine(ar.Time), // 汉字序号，活动时间
-			Num2ChineseStr(indexNum+3), handleStrNewLine(ar.ParticipantQualification), // 汉字序号，参与资格
-			Num2ChineseStr(indexNum+4),             // 活动规则汉字序号
+			Num2ChineseStr(indexNum), handleStrNewLine(ar.Name), // 汉字序号，活动名称
+			Num2ChineseStr(indexNum+1), handleStrNewLine(ar.Time), // 汉字序号，活动时间
+			Num2ChineseStr(indexNum+2), handleStrNewLine(ar.ParticipantQualification), // 汉字序号，参与资格
+			Num2ChineseStr(indexNum+3),             // 活动规则汉字序号
 			handleStrNewLine(ar.ParticipateWay),    // 参与方式
 			handleStrNewLine(ar.PrizeContent),      // 奖项设置
 			tabRowStyleStr,                         // 奖品内容
@@ -98,7 +99,8 @@ func genDocumentStr(po EventsVO) string {
 			handleStrNewLine(ar.AwardDistribution), // 奖品发放
 			subRuleStr,                             // 自定义子标题
 		)
-		indexNum = endVal
+
+		indexNum += firstTitleNum
 	}
 	docStr = fmt.Sprintf(template.DocxStyle,
 		activityStr,                                                     // 所有活动样式字符串
