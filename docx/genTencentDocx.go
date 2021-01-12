@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"powerlaw.ai/platform/docx/docx/template"
 )
@@ -16,17 +17,37 @@ type PrizePO struct {
 	Count       string
 }
 
-type TencentPO struct {
-	ActivityName             string
-	ActivityTime             string
+type EventsVO struct {
+	Name               string
+	Qualification      string
+	ActivityRules      []ActivityRule
+	Disqualification   string // 资格取消
+	TaxDuty            string // 纳税义务
+	ExemptionClause    string // 免责条款
+	JurisdictionClause string // 管辖条款
+	Other              string
+}
+
+type ActivityRule struct {
+	Name                     string
+	Time                     string
 	ParticipantQualification string
 	ParticipateWay           string
 	WinningRules             string
 	Prizes                   []PrizePO
+	PrizeContent             string
+	Announcement             string
+	AwardDistribution        string
+	SubRules                 []NameVO
+}
+
+type NameVO struct {
+	Name    string
+	Content string
 }
 
 // Save save file to path
-func SaveTencentDocx(po TencentPO, path string) (err error) {
+func SaveTencentDocx(po EventsVO, path string) (err error) {
 	f := NewDocx()
 	fzip, _ := os.Create(path)
 	defer fzip.Close()
@@ -37,7 +58,7 @@ func SaveTencentDocx(po TencentPO, path string) (err error) {
 	return f.packWithDocStr(zipWriter, docStr)
 }
 
-func WriteTencentDocx(po TencentPO, writer io.Writer) (err error) {
+func WriteTencentDocx(po EventsVO, writer io.Writer) (err error) {
 	f := NewDocx()
 	zipWriter := zip.NewWriter(writer)
 	defer zipWriter.Close()
@@ -45,21 +66,64 @@ func WriteTencentDocx(po TencentPO, writer io.Writer) (err error) {
 	return f.packWithDocStr(zipWriter, docStr)
 }
 
-func genDocumentStr(po TencentPO) string {
-	var rowStyleStr string
-	for _, prize := range po.Prizes {
-		rowStyleStr += fmt.Sprintf(template.TableRow,
-			prize.Name, prize.Description, prize.Probability, prize.Count,
-		)
-	}
+func genDocumentStr(po EventsVO) string {
+	allActivates := po.ActivityRules
+	var docStr, activityStr string
+	var indexNum int
+	for _, ar := range allActivates {
+		var tabRowStyleStr, subRuleStr string
+		// 构建奖品表中的数据样式字符串
+		for _, prize := range ar.Prizes {
+			tabRowStyleStr += fmt.Sprintf(template.TableRow,
+				prize.Name, prize.Description, prize.Probability, prize.Count,
+			)
+		}
+		endVal := indexNum + 5
 
-	docStr := fmt.Sprintf(template.Demo,
-		po.ActivityName,
-		po.ActivityTime,
-		po.ParticipantQualification,
-		po.ParticipateWay,
-		po.WinningRules,
-		rowStyleStr,
+		// 构建活动中子标题样式字符串
+		for index, name := range ar.SubRules {
+			subRuleStr += fmt.Sprintf(
+				template.SubRuleStyle, Num2ChineseStr(endVal+index),
+				name.Name, handleStrNewLine(name.Content))
+		}
+		activityStr += fmt.Sprintf(template.ActivateRuleStyle,
+			Num2ChineseStr(indexNum+1), handleStrNewLine(ar.Name), // 汉字序号，活动名称
+			Num2ChineseStr(indexNum+2), handleStrNewLine(ar.Time), // 汉字序号，活动时间
+			Num2ChineseStr(indexNum+3), handleStrNewLine(ar.ParticipantQualification), // 汉字序号，参与资格
+			Num2ChineseStr(indexNum+4),             // 活动规则汉字序号
+			handleStrNewLine(ar.ParticipateWay),    // 参与方式
+			handleStrNewLine(ar.PrizeContent),      // 奖项设置
+			tabRowStyleStr,                         // 奖品内容
+			handleStrNewLine(ar.Announcement),      // 开奖设置
+			handleStrNewLine(ar.AwardDistribution), // 奖品发放
+			subRuleStr,                             // 自定义子标题
+		)
+		indexNum = endVal
+	}
+	docStr = fmt.Sprintf(template.DocxStyle,
+		activityStr,                                                     // 所有活动样式字符串
+		Num2ChineseStr(indexNum), handleStrNewLine(po.Disqualification), // 汉字序号,资格取消
+		Num2ChineseStr(indexNum+1), handleStrNewLine(po.TaxDuty), // 汉字序号，纳税义务
+		Num2ChineseStr(indexNum+2), handleStrNewLine(po.ExemptionClause), // 汉字序号，免责条款
+		Num2ChineseStr(indexNum+3), handleStrNewLine(po.JurisdictionClause), // 汉字序号，管辖条款
+		Num2ChineseStr(indexNum+4), handleStrNewLine(po.Other), // 汉字序号，其他
 	)
+
 	return docStr
+}
+
+// 处理字符串中的换行符
+func handleStrNewLine(str string) string {
+	strList := strings.Split(str, "\n")
+	var styleStr string
+	if len(strList) == 0 {
+		return str
+	}
+	for _, s := range strList {
+		if s == "" {
+			continue
+		}
+		styleStr += fmt.Sprintf(template.NewLineStyle, s)
+	}
+	return styleStr
 }
