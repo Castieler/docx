@@ -7,6 +7,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/pkg/errors"
+
 	"powerlaw.ai/platform/docx/docx/template"
 )
 
@@ -47,7 +49,10 @@ type NameVO struct {
 // Save save file to path
 func SaveTencentDocx(po EventsVO, path string) (err error) {
 	f := NewDocx()
-	fzip, _ := os.Create(path)
+	fzip, err := os.Create(path)
+	if err != nil {
+		return errors.WithStack(err)
+	}
 	defer fzip.Close()
 
 	zipWriter := zip.NewWriter(fzip)
@@ -81,28 +86,31 @@ func genDocumentStr(po EventsVO) string {
 				Num2ChineseStr(indexNum+index), ft)
 			firstContentStr := firstTitleContent[index]
 			if firstContentStr != "" {
-				activityStr += handleStrNewLine(firstContentStr)
+				activityStr += handleCharAndGenSpanStyle(firstContentStr)
 			}
 		}
 		// 2. 拼接活动规则下的数据
 		var tabRowStyleStr, subRuleStr string
 		for _, prize := range ar.Prizes {
 			tabRowStyleStr += fmt.Sprintf(template.TableRow,
-				prize.Name, prize.Description, prize.Probability, prize.Count,
+				handleCharAndGenSpanStyle(prize.Name),
+				handleCharAndGenSpanStyle(prize.Description),
+				handleCharAndGenSpanStyle(prize.Probability),
+				handleCharAndGenSpanStyle(prize.Count),
 			)
 		}
 
 		secondContentList := []string{
-			handleStrNewLine(ar.ParticipateWay),
-			handleStrNewLine(ar.PrizeContent) + fmt.Sprintf(template.TableStyle, tabRowStyleStr),
-			handleStrNewLine(ar.Announcement),      // 开奖设置
-			handleStrNewLine(ar.AwardDistribution), // 奖品发放
+			handleCharAndGenSpanStyle(ar.ParticipateWay),
+			handleCharAndGenSpanStyle(ar.PrizeContent) + fmt.Sprintf(template.TableStyle, tabRowStyleStr),
+			handleCharAndGenSpanStyle(ar.Announcement),      // 开奖设置
+			handleCharAndGenSpanStyle(ar.AwardDistribution), // 奖品发放
 		}
 		secondTitleList := template.SecondTitleList
 		for _, name := range ar.SubRules {
 			secondTitleList = append(secondTitleList, name.Name)
 			secondContentList = append(secondContentList,
-				handleStrNewLine(name.Content))
+				handleCharAndGenSpanStyle(name.Content))
 		}
 
 		for index, name := range secondTitleList {
@@ -127,7 +135,7 @@ func genDocumentStr(po EventsVO) string {
 			Num2ChineseStr(indexNum+index), ft)
 		firstContentStr := firstTitleContent[index]
 		if firstContentStr != "" {
-			activityStr += handleStrNewLine(firstContentStr)
+			activityStr += handleCharAndGenSpanStyle(firstContentStr)
 		}
 	}
 
@@ -138,8 +146,13 @@ func genDocumentStr(po EventsVO) string {
 	return docStr
 }
 
-// 处理字符串中的换行符
-func handleStrNewLine(str string) string {
+// 处理字符串中的换行符 & > < ' " 并生成一个段落样式
+func handleCharAndGenSpanStyle(str string) string {
+	str = strings.ReplaceAll(str, "&", "&amp;")
+	str = strings.ReplaceAll(str, "<", "&lt;")
+	str = strings.ReplaceAll(str, ">", "&gt;")
+	str = strings.ReplaceAll(str, "\"", "&quot;")
+	str = strings.ReplaceAll(str, "'", "&apos;")
 	strList := strings.Split(str, "\n")
 	var styleStr string
 	if len(strList) == 0 {

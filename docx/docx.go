@@ -7,6 +7,8 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/pkg/errors"
+
 	"powerlaw.ai/platform/docx/docx/paragraph"
 	"powerlaw.ai/platform/docx/docx/relationship"
 	run2 "powerlaw.ai/platform/docx/docx/run"
@@ -185,12 +187,12 @@ func (f *Docx) packWithDocStr(zipWriter *zip.Writer,
 	for path, data := range files {
 		w, err := zipWriter.Create(path)
 		if err != nil {
-			return err
+			return errors.WithStack(err)
 		}
 
 		_, err = w.Write([]byte(data))
 		if err != nil {
-			return err
+			return errors.WithStack(err)
 		}
 	}
 
